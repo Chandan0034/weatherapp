@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, Typography, Icon, Grid, Container, CircularProgress, useMediaQuery, useTheme } from '@mui/material';
+import { Card, CardContent, Typography, Icon, Grid, Container, CircularProgress } from '@mui/material';
 import axios from 'axios';
 import Chart from './Charts';
 
@@ -10,7 +10,7 @@ const Forecast = ({ city }) => {
   useEffect(() => {
     const fetchForecast = async () => {
       try {
-        const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?key=04e680411e39450a87434343240607&q=pune&days=7&aqi=no&alerts=no`);
+        const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?key=04e680411e39450a87434343240607&q=${city}&days=7&aqi=no&alerts=no`);
         setForecast(response.data.forecast.forecastday);
         setLoading(false); // Set loading to false when data is fetched
       } catch (error) {
@@ -24,8 +24,8 @@ const Forecast = ({ city }) => {
     }
   }, [city]);
 
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); // Check if screen size is small (mobile)
+  // const theme = useTheme();
+  // const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); // Check if screen size is small (mobile)
 
   if (loading) {
     return (
@@ -36,7 +36,7 @@ const Forecast = ({ city }) => {
   }
 
   if (!forecast || forecast.length === 0) {
-    return <Typography variant="h6" fontFamily={'Poplins sans-serif'}>No forecast data available</Typography>; // Handle no forecast data
+    return <Typography variant="h6" fontFamily={'Poplins sans-serif'} color={'white'}>No forecast data available</Typography>; // Handle no forecast data
   }
 
   const getDayName = (dateString) => {

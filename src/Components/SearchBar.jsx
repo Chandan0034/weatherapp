@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TextField, Autocomplete, Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button, Select, MenuItem, IconButton, Typography, useMediaQuery, useTheme } from '@mui/material';
 import axios from 'axios';
 
-const SearchBar = ({ setCity, setForecastData }) => {
+const SearchBar = ({ setCity}) => {
   const [inputValue, setInputValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [favoriteCities, setFavoriteCities] = useState([]);
@@ -105,24 +105,24 @@ const SearchBar = ({ setCity, setForecastData }) => {
     }
     setCity(city);
     try {
-      const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?key=04e680411e39450a87434343240607&q=${city}&days=7&aqi=no&alerts=yes`); // Enable alerts fetching
-      const forecastData = parseForecastData(response.data);
-      setForecastData(forecastData);
+      // const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?key=04e680411e39450a87434343240607&q=${city}&days=7&aqi=no&alerts=yes`); // Enable alerts fetching
+      // const forecastData = parseForecastData(response.data);
+      // setForecastData(forecastData);
       setSelectedFavoriteCity([]);
     } catch (error) {
       console.error('Error fetching weather data:', error);
     }
   };
 
-  const parseForecastData = (data) => {
-    if (!data || !data.forecast || !data.forecast.forecastday) {
-      return [];
-    }
-    return data.forecast.forecastday.map(day => ({
-      day: new Date(day.date).toLocaleDateString('en-US', { weekday: 'short' }),
-      // Add other relevant data here as needed (e.g., temperature, condition)
-    }));
-  };
+  // const parseForecastData = (data) => {
+  //   if (!data || !data.forecast || !data.forecast.forecastday) {
+  //     return [];
+  //   }
+  //   return data.forecast.forecastday.map(day => ({
+  //     day: new Date(day.date).toLocaleDateString('en-US', { weekday: 'short' }),
+  //     // Add other relevant data here as needed (e.g., temperature, condition)
+  //   }));
+  // };
 
   return (
     <Box>
